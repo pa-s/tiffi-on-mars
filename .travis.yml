@@ -2,7 +2,10 @@ language: node_js
 node_js:
   - 0.10
 before_script:
+  - npm install -g codeclimate-test-reporter
   - npm install -d
+after_script:
+  - CODECLIMATE_REPO_TOKEN=cdf8342cf63503701ac05109c215eb6769413b29daee213f3d58c39d76c8115e codeclimate < coverage/lcov.info
 branches:
   only:
     - master
