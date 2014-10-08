@@ -1,4 +1,6 @@
 var coordinateForDirection = require('../src/moveRules').coordinateForDirection;
+var coordinateForMovement = require('../src/moveRules').coordinateForMovement;
+
 
 describe("Move Rules", function() {
 
@@ -71,6 +73,21 @@ describe("Move Rules", function() {
           coordinateForDirection('S', direction);
         }).toThrow(e);
 
+      });
+
+    });
+  });
+
+  describe('#coordinateForMovement', function(){
+    describe("Given an initial position of (5,9)", function(){
+      var position = [5,9];
+
+      describe("Given coordinate N", function(){
+        var coordinate = 'N';
+
+        it("returns (5,10)", function(){
+          expect(coordinateForMovement(position, coordinate)).toEqual([5,10]);
+        });
       });
 
     });

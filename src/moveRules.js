@@ -15,7 +15,14 @@ var coordinateRules = {
     L: 'S',
     R: 'N'
   }
-}
+};
+
+var movementRules = {
+  N: [0, 1],
+  S: [0, -1],
+  E: [1, 0],
+  W: [-1, 0]
+};
 
 var coordinateForDirection = function(coordinate, direction){
   if (coordinateRules[coordinate] === undefined) {
@@ -27,9 +34,17 @@ var coordinateForDirection = function(coordinate, direction){
   }
 
   return coordinateRules[coordinate][direction];
-}
+};
 
+var coordinateForMovement = function(position, coordinate){
+  var diff = movementRules[coordinate];
+  return [
+    position[0] + diff[0],
+    position[1] + diff[1]
+  ];
+};
 
 module.exports = {
-  coordinateForDirection: coordinateForDirection
+  coordinateForDirection: coordinateForDirection,
+  coordinateForMovement: coordinateForMovement
 };
