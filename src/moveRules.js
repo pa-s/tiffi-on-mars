@@ -1,4 +1,4 @@
-var coordinateRules = {
+var cardinalDirectionRules = {
   N: {
     L: 'W',
     R: 'E'
@@ -24,35 +24,36 @@ var movementRules = {
   W: [-1, 0]
 };
 
-var coordinateForDirection = function(coordinate, direction){
-  if (coordinateRules[coordinate] === undefined) {
-    throw new Error("The coordinate is invalid.");
+var cardinalForDirection = function(cardinalDirection, direction){
+  if (cardinalDirectionRules[cardinalDirection] === undefined) {
+    throw new Error("The cardinal direction is invalid.");
   }
 
-  if (coordinateRules[coordinate][direction] === undefined) {
+  if (cardinalDirectionRules[cardinalDirection][direction] === undefined) {
     throw new Error("The direction is invalid.");
   }
 
-  return coordinateRules[coordinate][direction];
+  return cardinalDirectionRules[cardinalDirection][direction];
 };
 
-var coordinateForMovement = function(position, coordinate){
-  if (!Array.isArray(position) || position.length != 2){
-    throw new Error("The position is invalid.");
-  }
-
-  if (movementRules[coordinate] === undefined){
+var coordinateForMovement = function(coordinate, cardinalDirection){
+  if (!Array.isArray(coordinate) || coordinate.length != 2){
     throw new Error("The coordinate is invalid.");
   }
 
-  var diff = movementRules[coordinate];
+  var diff = movementRules[cardinalDirection];
+
+  if (diff === undefined){
+    throw new Error("The cardinal direction is invalid.");
+  }
+
   return [
-    position[0] + diff[0],
-    position[1] + diff[1]
+    coordinate[0] + diff[0],
+    coordinate[1] + diff[1]
   ];
 };
 
 module.exports = {
-  coordinateForDirection: coordinateForDirection,
+  cardinalForDirection: cardinalForDirection,
   coordinateForMovement: coordinateForMovement
 };

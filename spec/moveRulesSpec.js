@@ -1,18 +1,18 @@
-var coordinateForDirection = require('../src/moveRules').coordinateForDirection;
+var cardinalForDirection = require('../src/moveRules').cardinalForDirection;
 var coordinateForMovement = require('../src/moveRules').coordinateForMovement;
 
 
 describe("Move Rules", function() {
 
-  describe('#coordinateForDirection', function(){
-    describe("Given coordinate N", function(){
-      var coordinate = 'N';
+  describe('#cardinalForDirection', function(){
+    describe("Given cardinal direction N", function(){
+      var cardinalDirection = 'N';
 
       describe("Given direction R", function(){
         var direction = 'R';
 
         it("returns E", function() {
-          expect(coordinateForDirection(coordinate, direction)).toBe('E');
+          expect(cardinalForDirection(cardinalDirection, direction)).toBe('E');
         });
 
       });
@@ -21,21 +21,21 @@ describe("Move Rules", function() {
         var direction = 'L';
 
         it("returns W", function() {
-          expect(coordinateForDirection(coordinate, direction)).toBe('W');
+          expect(cardinalForDirection(cardinalDirection, direction)).toBe('W');
         });
 
       });
 
     });
 
-    describe("Given coordinate E", function(){
-      var coordinate = 'E';
+    describe("Given cardinal direction E", function(){
+      var cardinalDirection = 'E';
 
       describe("Given direction R", function(){
         var direction = 'R';
 
         it("returns S", function() {
-          expect(coordinateForDirection(coordinate, direction)).toBe('S');
+          expect(cardinalForDirection(cardinalDirection, direction)).toBe('S');
         });
 
       });
@@ -44,21 +44,21 @@ describe("Move Rules", function() {
         var direction = 'L';
 
         it("returns N", function() {
-          expect(coordinateForDirection(coordinate, direction)).toBe('N');
+          expect(cardinalForDirection(cardinalDirection, direction)).toBe('N');
         });
 
       });
 
     });
 
-    describe("Given an invalid coordinate", function(){
-      var coordinate = 'L';
+    describe("Given an invalid cardinal direction", function(){
+      var cardinalDirection = 'L';
 
       it("throws an error", function(){
-        var e = new Error("The coordinate is invalid.");
+        var e = new Error("The cardinal direction is invalid.");
 
         expect(function() {
-          coordinateForDirection(coordinate, 'R');
+          cardinalForDirection(cardinalDirection, 'R');
         }).toThrow(e);
 
       });
@@ -72,7 +72,7 @@ describe("Move Rules", function() {
         var e = new Error("The direction is invalid.");
 
         expect(function() {
-          coordinateForDirection('S', direction);
+          cardinalForDirection('S', direction);
         }).toThrow(e);
 
       });
@@ -84,66 +84,66 @@ describe("Move Rules", function() {
     describe("Given an initial position of (5,9)", function(){
       var position = [5,9];
 
-      describe("Given coordinate N", function(){
-        var coordinate = 'N';
+      describe("Given cardinal direction N", function(){
+        var cardinalDirection = 'N';
 
         it("returns (5,10)", function(){
-          expect(coordinateForMovement(position, coordinate)).toEqual([5,10]);
+          expect(coordinateForMovement(position, cardinalDirection)).toEqual([5,10]);
         });
       });
     });
 
-    describe("Given an invalid position", function(){
+    describe("Given an invalid coordinate", function(){
       describe("of wrong type", function(){
-        var position = '5,9';
+        var coordinate = '5,9';
 
         it("throws an error", function(){
-          var e = new Error("The position is invalid.");
+          var e = new Error("The coordinate is invalid.");
 
           expect(function() {
-            coordinateForMovement(position, 'N');
+            coordinateForMovement(coordinate, 'N');
           }).toThrow(e);
 
         });
       });
 
       describe("of wrong length", function(){
-        var position1 = [1];
-        var position2 = [1,2,3];
-        var position3 = [];
+        var coordinate1 = [1];
+        var coordinate2 = [1,2,3];
+        var coordinate3 = [];
 
         it("throws an error", function(){
-          var e = new Error("The position is invalid.");
+          var e = new Error("The coordinate is invalid.");
 
           expect(function() {
-            coordinateForMovement(position1, 'N');
+            coordinateForMovement(coordinate1, 'N');
           }).toThrow(e);
 
           expect(function() {
-            coordinateForMovement(position2, 'N');
+            coordinateForMovement(coordinate2, 'N');
           }).toThrow(e);
 
           expect(function() {
-            coordinateForMovement(position3, 'N');
+            coordinateForMovement(coordinate3, 'N');
           }).toThrow(e);
 
         });
       });
     });
 
-    describe("Given an invalid coordinate", function(){
+    describe("Given an invalid cardinal direction", function(){
       var position = [5,9];
-      var coordinate = 'L';
+      var cardinalDirection = 'L';
 
       it("throws an error", function(){
-        var e = new Error("The coordinate is invalid.");
+        var e = new Error("The cardinal direction is invalid.");
 
         expect(function() {
-          coordinateForMovement(position, coordinate);
+          coordinateForMovement(position, cardinalDirection);
         }).toThrow(e);
 
       });
     });
-    
+
   });
 });
