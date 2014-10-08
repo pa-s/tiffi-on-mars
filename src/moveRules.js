@@ -37,6 +37,14 @@ var coordinateForDirection = function(coordinate, direction){
 };
 
 var coordinateForMovement = function(position, coordinate){
+  if (!Array.isArray(position) || position.length != 2){
+    throw new Error("The position is invalid.");
+  }
+
+  if (movementRules[coordinate] === undefined){
+    throw new Error("The coordinate is invalid.");
+  }
+
   var diff = movementRules[coordinate];
   return [
     position[0] + diff[0],

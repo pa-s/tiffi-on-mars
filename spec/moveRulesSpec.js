@@ -56,6 +56,7 @@ describe("Move Rules", function() {
 
       it("throws an error", function(){
         var e = new Error("The coordinate is invalid.");
+
         expect(function() {
           coordinateForDirection(coordinate, 'R');
         }).toThrow(e);
@@ -69,6 +70,7 @@ describe("Move Rules", function() {
 
       it("throws an error", function(){
         var e = new Error("The direction is invalid.");
+
         expect(function() {
           coordinateForDirection('S', direction);
         }).toThrow(e);
@@ -89,7 +91,59 @@ describe("Move Rules", function() {
           expect(coordinateForMovement(position, coordinate)).toEqual([5,10]);
         });
       });
-
     });
+
+    describe("Given an invalid position", function(){
+      describe("of wrong type", function(){
+        var position = '5,9';
+
+        it("throws an error", function(){
+          var e = new Error("The position is invalid.");
+
+          expect(function() {
+            coordinateForMovement(position, 'N');
+          }).toThrow(e);
+
+        });
+      });
+
+      describe("of wrong length", function(){
+        var position1 = [1];
+        var position2 = [1,2,3];
+        var position3 = [];
+
+        it("throws an error", function(){
+          var e = new Error("The position is invalid.");
+
+          expect(function() {
+            coordinateForMovement(position1, 'N');
+          }).toThrow(e);
+
+          expect(function() {
+            coordinateForMovement(position2, 'N');
+          }).toThrow(e);
+
+          expect(function() {
+            coordinateForMovement(position3, 'N');
+          }).toThrow(e);
+
+        });
+      });
+    });
+
+    describe("Given an invalid coordinate", function(){
+      var position = [5,9];
+      var coordinate = 'L';
+
+      it("throws an error", function(){
+        var e = new Error("The coordinate is invalid.");
+
+        expect(function() {
+          coordinateForMovement(position, coordinate);
+        }).toThrow(e);
+
+      });
+    });
+    
   });
 });
