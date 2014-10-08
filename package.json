@@ -1,0 +1,19 @@
+{
+  "name": "tiffi-on-mars",
+  "version": "1.0.0",
+  "description": "tiffi-on-mars =============",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sarahpimentel/tiffi-on-mars.git"
+  },
+  "author": "Sarah Pimentel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sarahpimentel/tiffi-on-mars/issues"
+  },
+  "homepage": "https://github.com/sarahpimentel/tiffi-on-mars",
+}
