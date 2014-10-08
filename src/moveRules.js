@@ -37,7 +37,7 @@ var cardinalForDirection = function(cardinalDirection, direction){
 };
 
 var coordinateForMovement = function(coordinate, cardinalDirection){
-  if (!Array.isArray(coordinate) || coordinate.length != 2){
+  if (!Array.isArray(coordinate) || coordinate.length !== 2){
     throw new Error("The coordinate is invalid.");
   }
 
