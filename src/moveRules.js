@@ -18,5 +18,13 @@ var rules = {
 }
 
 module.exports = function(coordinate, direction){
+  if (rules[coordinate] === undefined) {
+    throw new Error("The coordinate is invalid.");
+  }
+
+  if (rules[coordinate][direction] === undefined) {
+    throw new Error("The direction is invalid.");
+  }
+
   return rules[coordinate][direction];
 }
