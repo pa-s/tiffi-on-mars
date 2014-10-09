@@ -1,39 +1,17 @@
-var cardinalDirectionRules = {
-  N: {
-    L: 'W',
-    R: 'E'
-  },
-  E: {
-    L: 'N',
-    R: 'S'
-  },
-  S: {
-    L: 'E',
-    R: 'W'
-  },
-  W: {
-    L: 'S',
-    R: 'N'
-  }
-};
-
-var movementRules = {
-  N: [0, 1],
-  S: [0, -1],
-  E: [1, 0],
-  W: [-1, 0]
-};
+var rules = require("./config")
 
 var cardinalForDirection = function(cardinalDirection, direction){
-  if (cardinalDirectionRules[cardinalDirection] === undefined) {
+  var rule = rules.cardinalDirectionRules[cardinalDirection];
+
+  if (rule === undefined) {
     throw new Error("The cardinal direction is invalid.");
   }
 
-  if (cardinalDirectionRules[cardinalDirection][direction] === undefined) {
+  if (rule[direction] === undefined) {
     throw new Error("The direction is invalid.");
   }
 
-  return cardinalDirectionRules[cardinalDirection][direction];
+  return rule[direction];
 };
 
 var coordinateForMovement = function(coordinate, cardinalDirection){
@@ -41,7 +19,7 @@ var coordinateForMovement = function(coordinate, cardinalDirection){
     throw new Error("The coordinate is invalid.");
   }
 
-  var diff = movementRules[cardinalDirection];
+  var diff = rules.movementRules[cardinalDirection];
 
   if (diff === undefined){
     throw new Error("The cardinal direction is invalid.");
