@@ -2,13 +2,16 @@ var inquirer = require("inquirer");
 var World = require("./world");
 var Character = require("./character");
 
-var isNumber = function(value) {
-  return !isNaN(parseFloat(value));
+var dimensionsRegex = /^\d*(\s*)x(\s*)\d*/;
+var positionRegex = /^\d*,(\s*)\d*,(\s*)(N|n|E|e|W|w|S|s)/;
+
+function validateDimensions(value) {
+  return dimensionsRegex.test(value) || "World dimensions must be height x width";
 }
 
-var dimensionsRegex = /^\d*(\s*)x(\s*)\d*/
-var positionRegex = /^\d*,(\s*)\d*,(\s*)(N|n|E|e|W|w|S|s)/
-var movementRegex = /^(L|l|R|r|M|m)*/
+function validatePosition(value){
+  return positionRegex.test(value) || "Landing position must be: coordinate x, coordinate y, cardinal direction (N, E, W, or S)";
+}
 
 var questions = [
   {
@@ -16,31 +19,26 @@ var questions = [
     name: "worldDimensions",
     message: "What's the World's dimensions?",
     default: "9x9",
-    validate: function(value) {
-      return dimensionsRegex.test(value) || "World dimensions must be height x width";
-    }
+    validate: validateDimensions
   },
   {
     type: "input",
     name: "landingPosition",
     message: "What's Tiffi's landing position?",
     default: "0,0,E",
-    validate: function(value){
-      return positionRegex.test(value) || "Landing position must be: coordinate x, coordinate y, cardinal direction (N, E, W, or S)"
-    }
+    validate: validatePosition
   },
   {
     type: "input",
     name: "movementPlan",
     message: "What's Tiffi's movement plan?",
-    default: "MMLMRM",
-    validate: function(value){
-      return movementRegex.test(value) || "Movement must contain only directions (L or R) and moves (M)"
-    }
+    default: "MMLMRM"
   }
 ];
 
 module.exports = {
+  validateDimensions: validateDimensions,
+  validatePosition: validatePosition,
   run: function() {
     inquirer.prompt(questions, function(answers) {
 

@@ -4,16 +4,16 @@ var rules = require("./config");
 function World(dimensions) {
   if (!Array.isArray(dimensions) ||
     dimensions.length !== 2 ||
-    !dimensions[0] > 0 ||
-    !dimensions[1] > 0){
+    dimensions[0] <= 0 ||
+    dimensions[1] <= 0){
     throw new Error("The world dimensions are invalid.");
-  };
+  }
 
   this.dimensions = {
     width: dimensions[0],
     height: dimensions[1]
   };
-};
+}
 
 World.prototype.placeCharacter = function(Ctor, options){
   if (Ctor !== Character) {
@@ -32,7 +32,7 @@ World.prototype.placeCharacter = function(Ctor, options){
   }
 
   this.character = new Character(options.coordinate, options.cardinalDirection);
-}
+};
 
 
 module.exports = World;

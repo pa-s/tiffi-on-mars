@@ -1,4 +1,4 @@
-var rules = require("./config")
+var rules = require("./config");
 
 var cardinalForDirection = function(cardinalDirection, direction){
   var rule = rules.cardinalDirectionRules[cardinalDirection];

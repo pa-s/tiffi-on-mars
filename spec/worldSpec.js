@@ -151,7 +151,7 @@ describe("World", function(){
         coordinate = [9,9],
         cardinalDirection = "X",
         e = new Error("The character's cardinalDirection is invalid.");
-        
+
       expect(function() {
         world.placeCharacter(Character, {
           coordinate: coordinate,
