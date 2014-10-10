@@ -74,6 +74,26 @@ describe("cli", function(){
         expect(this.spy).toHaveBeenCalledWith('Tiffi handed out candies and ended at: %s%s%s', 3, 1, 'E');
       });
     });
+
+    describe("Given out of boundaries movements", function(){
+      var dimensions = "9x9",
+        landingPosition = "0,0,E",
+        movementPlan = "RMRMRM";
+
+      it("performs all valid moves ignoring the out of bounds movements", function(){
+        cli.run();
+
+        var fn = inquirer.prompt.mostRecentCall.args[1];
+
+        fn({
+          worldDimensions: dimensions,
+          landingPosition: landingPosition,
+          movementPlan: movementPlan
+        });
+
+        expect(this.spy).toHaveBeenCalledWith('Tiffi handed out candies and ended at: %s%s%s', 0, 1, 'N');
+      });
+    });
   });
 
 });

@@ -13,6 +13,13 @@ function validatePosition(value){
   return positionRegex.test(value) || "Landing position must be: coordinate x, coordinate y, cardinal direction (N, E, W, or S)";
 }
 
+function isMoveValid(move, world){
+  var x = move.coordinate[0];
+  var y = move.coordinate[1];
+
+  return ((x >= 0 && x < world.dimensions.width) && (y >= 0 && y < world.dimensions.height));
+};
+
 var questions = [
   {
     type: "input",
@@ -67,7 +74,11 @@ module.exports = {
                           });
 
       movementPlan.split('').forEach(function(movement){
-        world.character.move(movement);
+        var plottedMove = world.character.plotMove(movement);
+
+        if (isMoveValid(plottedMove, world)){
+          world.character.move(movement);
+        }
       });
 
       console.log("Tiffi handed out candies and ended at: %s%s%s",
