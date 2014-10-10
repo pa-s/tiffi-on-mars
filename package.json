@@ -19,5 +19,8 @@
   "devDependencies": {
     "istanbul": "^0.3.2",
     "jasmine-node": "^1.14.5"
+  },
+  "dependencies": {
+    "inquirer": "^0.8.0"
   }
 }
