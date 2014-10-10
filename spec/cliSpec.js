@@ -2,6 +2,34 @@ var cli = require("../src/cli.js");
 var inquirer = require("inquirer");
 
 describe("cli", function(){
+  describe("#validateDimensions", function(){
+    describe("when invalid", function(){
+      it("returns a message", function(){
+        expect(cli.validateDimensions("9")).toBe("World dimensions must be height x width");
+      });
+    });
+
+    describe("for valid inputs", function(){
+      it("returns true", function(){
+        expect(cli.validateDimensions("9x9")).toBe(true);
+      });
+    });
+  });
+
+  describe("#validatePosition", function(){
+    describe("when invalid", function(){
+      it("returns a message", function(){
+        expect(cli.validatePosition("9")).toBe("Landing position must be: coordinate x, coordinate y, cardinal direction (N, E, W, or S)");
+      });
+    });
+
+    describe("for valid inputs", function(){
+      it("returns true", function(){
+        expect(cli.validatePosition("0,0,E")).toBe(true);
+      });
+    });
+  });
+
   describe('#run', function() {
     beforeEach(function(){
       spyOn(inquirer, 'prompt');

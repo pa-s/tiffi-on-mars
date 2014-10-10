@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for src/character.js</title>
+    <title>Code coverage report for src/world.js</title>
     <meta charset="utf-8">
 
     <link rel="stylesheet" href="../prettify.css">
@@ -196,23 +196,23 @@
 </head>
 <body>
 <div class="header high">
-    <h1>Code coverage report for <span class="entity">src/character.js</span></h1>
+    <h1>Code coverage report for <span class="entity">src/world.js</span></h1>
     <h2>
         
-        Statements: <span class="metric">100% <small>(10 / 10)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">100% <small>(15 / 15)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class="metric">100% <small>(3 / 3)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">100% <small>(16 / 16)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
         Functions: <span class="metric">100% <small>(2 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class="metric">100% <small>(10 / 10)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">100% <small>(15 / 15)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
-    <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">src/</a> &#187; character.js</div>
+    <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">src/</a> &#187; world.js</div>
 </div>
 <div class="body">
 <pre><table class="coverage">
@@ -245,64 +245,91 @@
 27
 28
 29
-30</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">10</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">12</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">13</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var moveRules = require("./moveRules");
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var Character = require("./character.js");
+var rules = require("./config");
 &nbsp;
+function World(dimensions) {
+  if (!Array.isArray(dimensions) ||
+    dimensions.length !== 2 ||
+    dimensions[0] &lt;= 0 ||
+    dimensions[1] &lt;= 0){
+    throw new Error("The world dimensions are invalid.");
+  }
 &nbsp;
-function Character(coordinate, cardinalDirection) {
-  this.currentPosition = {
-    coordinate: coordinate,
-    cardinalDirection: cardinalDirection
+  this.dimensions = {
+    width: dimensions[0],
+    height: dimensions[1]
   };
 }
 &nbsp;
-Character.prototype.move = function(movement){
-    switch (movement){
-      case 'M':
-        this.currentPosition.coordinate = moveRules.coordinateForMovement(
-          this.currentPosition.coordinate,
-          this.currentPosition.cardinalDirection
-        );
-        break;
-      case 'L':
-      case 'R':
-        this.currentPosition.cardinalDirection = moveRules.cardinalForDirection(
-          this.currentPosition.cardinalDirection,
-          movement
-        );
-        break;
-    }
+World.prototype.placeCharacter = function(Ctor, options){
+  if (Ctor !== Character) {
+      throw new Error("The Character is invalid.");
+  }
+&nbsp;
+  if (options.coordinate[0] &gt; this.dimensions.width ||
+      options.coordinate[1] &gt; this.dimensions.height ||
+      options.coordinate[0] &lt; 0 ||
+      options.coordinate[1] &lt; 0) {
+      throw new Error("The character is out of world's boundaries.");
+  }
+&nbsp;
+  if (rules.cardinalDirectionRules[options.cardinalDirection] === undefined){
+    throw new Error("The character's cardinalDirection is invalid.");
+  }
+&nbsp;
+  this.character = new Character(options.coordinate, options.cardinalDirection);
 };
 &nbsp;
-module.exports = Character;
+&nbsp;
+module.exports = World;
 &nbsp;</pre></td></tr>
 </table></pre>
 

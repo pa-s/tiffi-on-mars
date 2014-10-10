@@ -6,7 +6,7 @@ function Character(coordinate, cardinalDirection) {
     coordinate: coordinate,
     cardinalDirection: cardinalDirection
   };
-};
+}
 
 Character.prototype.move = function(movement){
     switch (movement){
@@ -24,6 +24,6 @@ Character.prototype.move = function(movement){
         );
         break;
     }
-}
+};
 
 module.exports = Character;
