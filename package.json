@@ -2,8 +2,9 @@
   "name": "tiffi-on-mars",
   "version": "1.0.0",
   "description": "tiffi-on-mars =============",
-  "main": "index.js",
+  "main": "bin/tiffionmars",
   "scripts": {
+    "start": "node bin/tiffionmars",
     "test": "./node_modules/istanbul/lib/cli.js cover node_modules/jasmine-node/bin/jasmine-node spec/*.js"
   },
   "repository": {
