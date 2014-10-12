@@ -2,15 +2,15 @@ var inquirer = require("inquirer");
 var World = require("./world");
 var Character = require("./character");
 
-var dimensionsRegex = /^\d*(\s*)x(\s*)\d*/;
-var positionRegex = /^\d*,(\s*)\d*,(\s*)(N|n|E|e|W|w|S|s)/;
+var dimensionsRegex = /^[0-9]+\s?x\s?[0-9]+$/
+var positionRegex = /^[0-9]+,\s?[0-9]+,\s?(N|n|E|e|W|w|S|s{1})$/;
 
 function validateDimensions(value) {
-  return dimensionsRegex.test(value) || "World dimensions must be height x width";
+  return dimensionsRegex.test(value) || "World dimensions must be height x width. Example: 9x9";
 }
 
 function validatePosition(value){
-  return positionRegex.test(value) || "Landing position must be: coordinate x, coordinate y, cardinal direction (N, E, W, or S)";
+  return positionRegex.test(value) || "Landing position must be: coordinate x, coordinate y, cardinal direction (N, E, W, or S). Example: 0,0,E";
 }
 
 function isMoveValid(move, world){
@@ -24,7 +24,7 @@ var questions = [
   {
     type: "input",
     name: "worldDimensions",
-    message: "What's the World's dimensions?",
+    message: "What are the World's dimensions?",
     default: "9x9",
     validate: validateDimensions
   },
@@ -81,7 +81,7 @@ module.exports = {
         }
       });
 
-      console.log("Tiffi handed out candies and ended at: %s%s%s",
+      console.log("Tiffi handed out candies and ended at: %s,%s,%s",
         world.character.currentPosition.coordinate[0],
         world.character.currentPosition.coordinate[1],
         world.character.currentPosition.cardinalDirection
